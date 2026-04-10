@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gabriel Perdomo | Front-End Developer | Responsive Web Design</title>
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ============================= -->
+    <!-- HEADER / BARRA SUPERIOR       -->
+    <!-- ============================= -->
+    <header class="site-header">
+      <div class="container header-content">
+        
+        <a href="#hero" class="logo" aria-label="Ir al inicio">
+          <img src="logo.png" alt="Logo Gabriel Perdomo" class="logo-image" />
+        </a>
+
+        <!-- MENÚ DE NAVEGACIÓN -->
+        <nav class="main-nav" aria-label="Navegación principal">
+          <a href="#formulario">Pregunta por un Proyecto</a>
+          <a href="#sobre-mi">Sobre Mí</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+        <!-- ============================= -->
+        <!-- BOTÓN DE WHATSAPP             -->
+        <!-- ============================= -->
+        <a
+          class="btn btn-whatsapp"
+          href="https://wa.me/5491100000000"
+          target="_blank"
+          rel="noopener noreferrer"
+          >WhatsApp</a
+        >
+      </div>
+    </header>
+
+    <main>
+      <!-- ============================= -->
+      <!-- HERO PRINCIPAL                -->
+      <!-- ============================= -->
+      <section id="hero" class="hero section">
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <!-- TEXTOS PRINCIPALES -->
+            <h1>Gabriel Perdomo | Front-End Developer | Responsive Web Design</h1>
+            <p>
+              Desarrollador de páginas web modernas, intuitivas y dinámicas,
+              desarrolladas con HTML5, CSS3 y JavaScript.
+            </p>
+            <a href="#formulario" class="btn btn-primary">Pregunta por un Proyecto</a>
+          </div>
+
+          <figure class="hero-image-wrapper">
+            <img
+              src="ImagenPrincipal.png"
+              alt="computadora"
+              class="hero-image"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============================= -->
+      <!-- SOBRE MÍ                      -->
+      <!-- ============================= -->
+      <section id="sobre-mi" class="section section-alt">
+        <div class="container narrow">
+          <h2>Sobre Mí</h2>
+          <p>
+            Desarrollador Front-End especializado en Responsive Web Design, con
+            sólidos conocimientos en HTML5, CSS3 y JavaScript. Me enfoco en crear
+            interfaces modernas, adaptables y centradas en la experiencia del usuario.
+          </p>
+          <p>
+            Cuento además con conocimientos básicos en desarrollo Back-End utilizando
+            Python y Java, lo que me permite tener una visión integral en la
+            construcción de aplicaciones web.
+          </p>
+          <p>
+            Actualmente me encuentro cursando una Tecnicatura en Programación,
+            fortaleciendo mis habilidades y ampliando constantemente mis
+            conocimientos en el mundo del desarrollo.
+          </p>
+
+          <!--
+            ENLACES A PERFILES PERSONALES:
+            - GitHub
+            - LinkedIn
+            - Workana
+            - Computrabajo
+          -->
+          <div class="profile-links">
+            <a class="btn btn-primary" href="https://github.com/gabiperdo7?tab=repositories" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="btn btn-primary" href="https://www.linkedin.com/in/gabi-perdomo-a154a029b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="btn btn-primary" href="https://www.workana.com/freelancer/bd7d4f0ef79a3f913aadbe8663a5fa8d" target="_blank" rel="noopener noreferrer">Workana</a>
+            <a class="btn btn-primary" href="#" target="_blank" rel="noopener noreferrer">Computrabajo</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================= -->
+      <!-- FORMULARIO                    -->
+      <!-- ============================= -->
+      <section id="formulario" class="section">
+        <div class="container narrow">
+          <h2>Pregunta por un Proyecto</h2>
+          <p class="section-description">
+            Envíanos tu idea de proyecto que quieras llevar adelante completando
+            los siguientes campos.
+          </p>
+
+          <form id="lead-form" novalidate>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="nombres">Nombres</label>
+                <input type="text" id="nombres" name="nombres" required />
+                <small class="error-message" id="error-nombres"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="apellidos">Apellidos</label>
+                <input type="text" id="apellidos" name="apellidos" required />
+                <small class="error-message" id="error-apellidos"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="nombreProyecto">Nombre del Proyecto</label>
+                <input type="text" id="nombreProyecto" name="nombreProyecto" required />
+                <small class="error-message" id="error-nombreProyecto"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="mail">Mail</label>
+                <input type="email" id="mail" name="mail" required />
+                <small class="error-message" id="error-mail"></small>
+              </div>
+
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required />
+                <small class="error-message" id="error-telefono"></small>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="detallaProyecto">Detallá tu proyecto (máximo 1000 caracteres)</label>
+              <textarea
+                id="detallaProyecto"
+                name="detallaProyecto"
+                maxlength="1000"
+                rows="4"
+                required
+              ></textarea>
+              <div class="comment-footer">
+                <small class="error-message" id="error-detallaProyecto"></small>
+                <small id="char-counter">0 / 1000</small>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <p id="form-status" class="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============================= -->
+      <!-- CONTACTO                      -->
+      <!-- ============================= -->
+      <section id="contacto" class="section section-alt">
+        <div class="container narrow">
+          <h2>Contacto</h2>
+          <!-- DATOS DE CONTACTO -->
+          <p>Email: gabiperdo7@gmail.com</p>
+          <p>Teléfono: +54 3442 310793</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================= -->
+    <!-- FOOTER                         -->
+    <!-- ============================= -->
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2026 Gabriel Perdomo Developper Front-End Responsive Web Design. Todos los derechos reservados.</p>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

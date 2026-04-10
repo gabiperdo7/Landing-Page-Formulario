@@ -1,0 +1,130 @@
+/**
+ * GOOGLE APPS SCRIPT 
+ *
+ * Qué hace:
+ * - Recibe POST del formulario.
+ * - Soporta JSON y form-urlencoded.
+ * - Guarda en la hoja configurada.
+ * - Si la hoja no existe, la crea con encabezados.
+ * - Envía un correo de notificación cuando llega una solicitud nueva.
+ */
+
+// =============================================================
+// CONFIGURACIÓN
+// =============================================================
+const SHEET_NAME = "FormularioLandingPage";
+const SPREADSHEET_ID = "";
+const NOTIFICATION_EMAIL = "gabiperdo7@gmail.com";
+
+function jsonResponse(payload) {
+  return ContentService
+    .createTextOutput(JSON.stringify(payload))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doGet() {
+  return jsonResponse({
+    status: "success",
+    message: "Apps Script activo. Usá POST para guardar.",
+    date: new Date().toISOString(),
+  });
+}
+
+function getSpreadsheet_() {
+  if (SPREADSHEET_ID && SPREADSHEET_ID.trim() !== "") {
+    return SpreadsheetApp.openById(SPREADSHEET_ID.trim());
+  }
+  return SpreadsheetApp.getActiveSpreadsheet();
+}
+
+function getOrCreateSheet_(ss, sheetName) {
+  let sh = ss.getSheetByName(sheetName);
+  if (!sh) sh = ss.insertSheet(sheetName);
+
+  if (sh.getLastRow() === 0) {
+    sh.appendRow([
+      "Fecha",
+      "Nombres",
+      "Apellidos",
+      "Nombre del Proyecto",
+      "Mail",
+      "Telefono",
+      "Detalla tu Proyecto",
+    ]);
+  }
+
+  return sh;
+}
+
+function sendNotificationEmail_(submission, sheetUrl) {
+  const subject = "Te llegó una nueva solicitud de proyecto";
+  const body = [
+    "Te llegó una nueva solicitud de proyecto.",
+    "",
+    `Nombres: ${submission.nombres || ""}`,
+    `Apellidos: ${submission.apellidos || ""}`,
+    `Nombre del proyecto: ${submission.nombreProyecto || ""}`,
+    "",
+    `Revisar planilla: ${sheetUrl}`,
+  ].join("\n");
+
+  // Intento principal con GmailApp y fallback a MailApp
+  try {
+    GmailApp.sendEmail(NOTIFICATION_EMAIL, subject, body);
+  } catch (gmailError) {
+    MailApp.sendEmail({
+      to: NOTIFICATION_EMAIL,
+      subject,
+      body,
+    });
+  }
+}
+
+function doPost(e) {
+  try {
+    const ss = getSpreadsheet_();
+    const sh = getOrCreateSheet_(ss, SHEET_NAME);
+
+    let data = {};
+    if (e && e.postData && e.postData.contents) {
+      try {
+        data = JSON.parse(e.postData.contents);
+      } catch (jsonError) {
+        data = e.parameter || {};
+      }
+    } else {
+      data = (e && e.parameter) ? e.parameter : {};
+    }
+
+    sh.appendRow([
+      data.fecha || new Date().toISOString(),
+      data.nombres || "",
+      data.apellidos || "",
+      data.nombreProyecto || "",
+      data.mail || "",
+      data.telefono || "",
+      data.detallaProyecto || "",
+    ]);
+
+    let notification = "sent";
+    try {
+      sendNotificationEmail_(data, ss.getUrl());
+    } catch (mailError) {
+      notification = `failed: ${mailError.message}`;
+    }
+
+    return jsonResponse({
+      status: "success",
+      message:
+        notification === "sent"
+          ? "Datos guardados correctamente y mail enviado."
+          : "Datos guardados correctamente, pero falló el envío de mail.",
+      notification,
+    });
+  } catch (error) {
+    return jsonResponse({
+      status: "error",
+      message: "Error en doPost: " + error.message,
+    });
+  }
+}
