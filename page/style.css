@@ -1,0 +1,310 @@
+/*
+  ARCHIVO: style.css
+  Este archivo controla el diseño visual de la landing page.
+  Estilo: minimalista (blanco, negro y grises), limpio y responsive.
+
+  GUÍA RÁPIDA PARA MODIFICAR:
+  - Colores principales: buscá la sección :root.
+  - Tamaños de texto y espaciados: buscá variables y clases de sección.
+  - Botón de WhatsApp: clase .btn-whatsapp.
+*/
+
+/* =========================================
+   VARIABLES GLOBALES
+   -----------------------------------------
+   Cambiá estos valores para personalizar colores y estilos.
+========================================= */
+:root {
+  --color-bg: #ffffff;
+  --color-text: #111111;
+  --color-muted: #555555;
+  --color-border: #dddddd;
+  --color-alt: #f6f6f6;
+  --color-primary: #111111;
+  --color-primary-contrast: #ffffff;
+  --color-whatsapp: #25d366;
+  --color-whatsapp-hover: #1da851;
+  --color-error: #b00020;
+  --color-success: #0f7b2f;
+
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Reset simple para mantener consistencia entre navegadores */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-text);
+  background: var(--color-bg);
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Contenedor reutilizable */
+.container {
+  width: min(1100px, 92%);
+  margin-inline: auto;
+}
+
+.narrow {
+  width: min(760px, 92%);
+}
+
+/* =========================================
+   HEADER
+========================================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-content {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.logo {
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.main-nav a {
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.main-nav a:hover {
+  color: var(--color-text);
+}
+
+/* =========================================
+   BOTONES
+========================================= */
+.btn {
+  border: none;
+  padding: 0.72rem 1.1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-primary-contrast);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+/*
+  BOTÓN DE WHATSAPP:
+  - Cambiá colores en variables --color-whatsapp y --color-whatsapp-hover.
+*/
+.btn-whatsapp {
+  background: var(--color-whatsapp);
+  color: #fff;
+}
+
+.btn-whatsapp:hover {
+  background: var(--color-whatsapp-hover);
+}
+
+/* =========================================
+   SECCIONES GENERALES
+========================================= */
+.section {
+  padding: 4rem 0;
+}
+
+.section-alt {
+  background: var(--color-alt);
+}
+
+.section h2 {
+  margin-bottom: 0.9rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+}
+
+.section-description {
+  margin-bottom: 1.5rem;
+  color: var(--color-muted);
+}
+
+.profile-links {
+  margin-top: 1.2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.profile-links .btn {
+  font-size: 0.95rem;
+}
+
+/* =========================================
+   HERO
+========================================= */
+.hero {
+  padding-top: 5rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-text h1 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  color: var(--color-muted);
+  margin-bottom: 1.5rem;
+}
+
+.hero-image-wrapper {
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================================
+   FORMULARIO
+========================================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+input,
+textarea {
+  width: 100%;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  background: #fff;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid #cfcfcf;
+  border-color: #bbb;
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.error-message {
+  display: block;
+  color: var(--color-error);
+  min-height: 1.1rem;
+  font-size: 0.88rem;
+}
+
+.form-status {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.form-status.success {
+  color: var(--color-success);
+}
+
+.form-status.error {
+  color: var(--color-error);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+.site-footer {
+  border-top: 1px solid var(--color-border);
+  padding: 1.3rem 0;
+  text-align: center;
+  color: var(--color-muted);
+}
+
+/* =========================================
+   RESPONSIVE
+   - Para celular: menú abajo del logo y una sola columna en hero/form.
+========================================= */
+@media (max-width: 900px) {
+  .hero-grid,
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .header-content {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0.8rem 0;
+  }
+
+  .main-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
